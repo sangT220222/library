@@ -8,7 +8,6 @@ function Book(name,author,pages,status) {
   this.status = status;
 }
 
-
 const add_book = document.createElement("button"); //creating html tags
 add_book.textContent = "Add Book";
 
@@ -35,7 +34,6 @@ function displayBooks(){
   })
 }
 
-
 const book_form = document.createElement("dialog");
 book_form.innerHTML =   ` 
   <form method = "dialog">
@@ -53,14 +51,11 @@ book_form.innerHTML =   `
 
 document.body.appendChild(add_book);
 document.body.appendChild(book_form);
-//append to body tag in html
-
 // book_form.style.display = "none"; //hiding the book form initially
 
 add_book.addEventListener("click", function(){
   // book_form.style.display = "block"; //visibility is changed when add_book btn is clicked
   book_form.showModal();
-
 })
 
 book_form.addEventListener("submit", function(event){
@@ -74,8 +69,6 @@ book_form.addEventListener("submit", function(event){
   //obtaining value that are in the input tag - specified above, and creating a new Book object
   var new_book = new Book(book_name.value,author.value,pages.value,status.value);
   
-
-  // addBookToLibrary(new_book);//calling function to append new book onto end of my_library
   my_library.push(new_book); //appending created book into the end of my_library array
   book_form.close();
   displayBooks(); //adding book(s) inside my_library to the html page
