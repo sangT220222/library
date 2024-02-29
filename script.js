@@ -49,7 +49,7 @@ book_form.innerHTML =   `
   </form>
 ` //pure replica of what you would type in a html file
 
-document.body.appendChild(add_book);
+document.body.appendChild(add_book);  
 document.body.appendChild(book_form);
 // book_form.style.display = "none"; //hiding the book form initially
 
