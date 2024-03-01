@@ -8,7 +8,19 @@ function Book(name,author,pages,status) {
   this.status = status;
 }
 
+Book.prototype.toggle_status = function (){
+// Add a button on each book’s display to change its read status.
+// To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
+  if (this.status.toUpperCase() === "READ"){
+    this.status = "not read";
+  } 
+  else{
+    this.status = "read";
+  }
+}
+
 function remove_book(index){
+  //checks if index is in valid range
   if(index >= 0 && index < my_library.length){
     my_library.splice(index,1); //index is where you the position of item you want to remove, 1 is number of items to remove
   }
@@ -36,17 +48,25 @@ function displayBooks(){
     <h6>${book.pages}</h6>
     <p>${book.status}</p>
     `; //setting the HTML layout up within the specified tag
-    const remove_btn = document.createElement("button")
+    const remove_btn = document.createElement("button");
     remove_btn.textContent = "Remove book";
     container.appendChild(card); //appending the newly created tag and content, inside card_container
 
-    remove_btn.addEventListener("click", function(event){
+    remove_btn.addEventListener("click", function(){
       remove_book(index);
       displayBooks(); //recursion used here so that whenevr remove_btn is clicked, the item is removed and the HTML will be updated with the updated library contents
     })
 
+    const book_status = document.createElement("button");
+    book_status.textContent = "Change book status";
+    container.appendChild(book_status);
+
+    book_status.addEventListener("click", function(){
+      book.toggle_status();
+      // console.log(my_library) //test line to check if status been changed accordingly
+    })
+
     card.appendChild(remove_btn);
-    console.log(index);
   })
 }
 
@@ -90,6 +110,4 @@ book_form.addEventListener("submit", function(event){
   console.log(my_library);
   displayBooks(); //adding book(s) inside my_library to the html page
 })
-
-//add a remove button on each book's display
 
