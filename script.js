@@ -8,10 +8,16 @@ function Book(name,author,pages,status) {
   this.status = status;
 }
 
+function remove_book(index){
+  if(index >= 0 && index < my_library.length){
+    my_library.splice(index,1); //index is where you the position of item you want to remove, 1 is number of items to remove
+  }
+}
+
 const add_book = document.createElement("button"); //creating html tags
 add_book.textContent = "Add Book";
 
-//printing books out in the libary
+//display books out in the libary on the HTML
 function displayBooks(){
   while(document.getElementById("books_container")){ //this loop checks if books_container exists in the html or not
     var to_remove = document.getElementById("books_container"); 
@@ -22,7 +28,7 @@ function displayBooks(){
   container.setAttribute("id","books_container"); 
   document.body.appendChild(container);
   //below is a loop that will go through the items in my_library array, and then append the items onto the html page based on instructions set
-  my_library.forEach(function(book){
+  my_library.forEach(function(book,index){
     const card = document.createElement("div");
     card.innerHTML = `
     <h3>${book.name}</h3> 
@@ -30,7 +36,17 @@ function displayBooks(){
     <h6>${book.pages}</h6>
     <p>${book.status}</p>
     `; //setting the HTML layout up within the specified tag
+    const remove_btn = document.createElement("button")
+    remove_btn.textContent = "Remove book";
     container.appendChild(card); //appending the newly created tag and content, inside card_container
+
+    remove_btn.addEventListener("click", function(event){
+      remove_book(index);
+      displayBooks(); //recursion used here so that whenevr remove_btn is clicked, the item is removed and the HTML will be updated with the updated library contents
+    })
+
+    card.appendChild(remove_btn);
+    console.log(index);
   })
 }
 
@@ -71,9 +87,9 @@ book_form.addEventListener("submit", function(event){
   
   my_library.push(new_book); //appending created book into the end of my_library array
   book_form.close();
+  console.log(my_library);
   displayBooks(); //adding book(s) inside my_library to the html page
 })
 
-
-
+//add a remove button on each book's display
 
