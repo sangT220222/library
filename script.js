@@ -64,6 +64,7 @@ function displayBooks(){
     book_status.addEventListener("click", function(){
       book.toggle_status();
       // console.log(my_library) //test line to check if status been changed accordingly
+      displayBooks();
     })
 
     card.appendChild(remove_btn);
