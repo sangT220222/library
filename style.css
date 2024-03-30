@@ -1,0 +1,12 @@
+input:invalid {
+  border: 2px dashed red;
+}
+
+input:invalid:required {
+  background-color: pink;
+}
+
+input:valid {
+  background-color: green;
+  color: white;
+}
